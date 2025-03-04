@@ -32,12 +32,14 @@ addExpense(expense);
   return (
    <form onSubmit={handleSubmit}>
     <input
+    className="description"
     type="text"
     placeholder="Description"
     value={description}
     onChange={(e) => setDescription(e.target.value)}/>
 
 <input
+className="amount"
 type="number"
 placeholder="Amount"
 value={amount}
@@ -45,11 +47,14 @@ onChange={(e) => setAmount(e.target.value)}/>
 
 
 <input 
+className="date"
 type="date"
 value={date}
 onChange={(e) =>setDate(e.target.value)}/>
 
-<button type="submit">{description && amount && date ? "Add Expense" : "Fill all fields"}</button>
+<button 
+className="btn-submit"
+type="submit">{description && amount && date ? "Add Expense" : "Fill all fields"}</button>
 
    </form>
   );
