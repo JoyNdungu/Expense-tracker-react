@@ -1,15 +1,24 @@
 
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import ExpenseForm from "./ExpenseForm"
 import ExpenseList from "./ExpenseList"
 
 
 const App = () => {
 
-  const [expenses, setExpenses] = useState([]);
-  const addExpense = (expense) => {
-    setExpenses((prevExpenses) => [...prevExpenses, expense]); 
-  };
+  const [expenses, setExpenses] = useState(() => {
+  const savedExpenses = localStorage.getItem ("expenses") ;
+  return savedExpenses ? JSON.parse(savedExpenses) : [];
+});
+
+useEffect (() => {
+  localStorage.setItem("expenses", JSON.stringify(expenses));
+}, [expenses]);
+
+
+const addExpense = (expense) => {
+  setExpenses((prevExpenses) => [...prevExpenses, expense]);
+};
 
 const deleteExpenses = (index) => {
   setExpenses(expenses.filter((_, i) => i !== index));
@@ -27,22 +36,29 @@ i === index
 :null ;
 
 
+
 };
+
+const totalExpenses = expenses.reduce((total, exp) => total + parseFloat(exp.amount), 0);
+
 
 
   return (
     <div>
       <h2>Expense Tracker</h2>
       <ExpenseForm addExpense={addExpense} />
+      <br/>
       <ul>
         {expenses.map((exp, index) => (
           <li key={index}>
             - Ksh {exp.amount} ({exp.description}) [{exp.date}]
-            <button onClick={() => editExpense(index)}>✏️Edit</button>
-            <button onClick={() => deleteExpenses(index)}>🗑️Delete</button>
+            <button className="btn-edit" onClick={() => editExpense(index)}>✏️Edit</button>
+            <button className="btn-delete" onClick={() => deleteExpenses(index)}>🗑️Delete</button>
           </li>
         ))}
       </ul>
+
+      <h3>Total Expenses: Ksh {totalExpenses}</h3>
     </div>
   );
 };

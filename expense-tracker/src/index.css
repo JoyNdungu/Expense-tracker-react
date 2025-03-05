@@ -5,6 +5,10 @@ background:url('./public/hexagonalbackground.jpg');
 background-repeat:no-repeat;
 background-size: cover;
 background-position: center;
+height: 100vh; 
+  width: 100vw; 
+  margin: 0; 
+  overflow-x: hidden;
 }
 
 h2{
@@ -15,6 +19,13 @@ h2{
   
 }
 
+h3{
+  font-size: 25px;
+  font-weight: bold;
+ margin-left:30px;
+  
+   
+}
 
 .description, .amount, .date, .btn-submit{
   padding:10px;
@@ -26,3 +37,24 @@ h2{
 background: #1c1c1c;
 
 }
+
+
+.btn-submit{
+  cursor:pointer;
+}
+
+
+.btn-edit, .btn-delete{
+  padding:7px;
+  margin:20px;
+  background-color:#1c1c1c;
+  color:azure;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  background-color: #2a0577;
+
+}
+
